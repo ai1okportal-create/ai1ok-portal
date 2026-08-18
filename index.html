@@ -3,75 +3,27 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="AI1OK — Авторський Індивідуальний 1 Онлайн-Кабінет." />
-    <title>AI1OK — Авторський Індивідуальний 1 Онлайн-Кабінет</title>
+    <meta name="robots" content="noindex,nofollow" />
+    <title>AI1OK — закрите тестування</title>
     <style>
-      :root { --ink:#102a43; --blue:#1769e0; --soft:#edf5ff; --line:#d9e6f4; --gold:#e7a826; }
-      * { box-sizing:border-box; } body { margin:0; color:var(--ink); font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif; background:#fff; }
-      .hero { padding:24px max(24px,calc((100% - 1080px)/2)); min-height:84vh; background:linear-gradient(135deg,#f7fbff 0%,var(--soft) 55%,#fff 100%); }
-      nav { display:flex; align-items:center; justify-content:space-between; } .brand { font-size:1.45rem; font-weight:850; letter-spacing:.08em; color:var(--blue); }
-      .tag { color:#4c6783; font-size:.9rem; } main { max-width:780px; padding:100px 0 50px; } .eyebrow { color:var(--blue); font-weight:700; letter-spacing:.06em; text-transform:uppercase; font-size:.8rem; }
-      h1 { max-width:750px; margin:14px 0 20px; font-size:clamp(2.7rem,7vw,5.4rem); line-height:1.02; letter-spacing:-.05em; } .lead { max-width:630px; color:#42607d; font-size:1.2rem; }
-      .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:30px; } .button { display:inline-block; padding:13px 19px; border:1px solid var(--blue); border-radius:10px; color:var(--blue); text-decoration:none; font-weight:700; background:white; cursor:pointer; font:inherit; } .button.primary { background:var(--blue); color:white; }
-      section { max-width:1080px; margin:0 auto; padding:76px 24px; } h2 { font-size:2rem; letter-spacing:-.03em; } .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; } .card { padding:24px; border:1px solid var(--line); border-radius:14px; } .card h3 { margin-top:0; } footer { padding:28px 24px; border-top:1px solid var(--line); color:#58708a; text-align:center; }
-      .role-intro { max-width:680px; color:#42607d; } .roles { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:28px; } .role { display:block; position:relative; min-height:155px; padding:22px 22px 18px 56px; border:1px solid var(--line); border-radius:14px; background:#fff; cursor:pointer; transition:.18s ease; } .role:hover,.path:hover { border-color:var(--blue); transform:translateY(-2px); } .role:has(input:checked) { border:2px solid var(--blue); background:#f6faff; } .role input { position:absolute; left:21px; top:25px; accent-color:var(--blue); width:18px; height:18px; } .role h3 { margin:0 0 7px; font-size:1.15rem; } .role p,.path p { margin:0; color:#58708a; font-size:.95rem; } .role-choice { display:flex; align-items:center; gap:12px; margin-top:25px; } #role-message { color:#42607d; font-weight:600; } .note { margin-top:22px; padding:18px 20px; border-left:4px solid var(--gold); background:#fffaf0; color:#604c1e; border-radius:0 10px 10px 0; } .path-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:28px; } .path { width:100%; min-height:190px; padding:25px; text-align:left; border:1px solid var(--line); border-radius:14px; background:#fff; cursor:pointer; font:inherit; color:var(--ink); transition:.18s ease; } .path h3 { margin:0 0 10px; font-size:1.3rem; } .step-panel { margin-top:22px; padding:25px; border:1px solid var(--line); border-radius:14px; background:#f7fbff; } .step-panel h3 { margin-top:0; } .method-list { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; } .method { padding:18px; border:1px solid var(--line); border-radius:10px; background:#fff; } .method strong { display:block; margin-bottom:5px; } [hidden] { display:none !important; }
-      @media (max-width:720px) { main { padding-top:72px; } .cards,.roles { grid-template-columns:1fr; } .tag { display:none; } }
+      :root { --ink:#102a43; --blue:#1769e0; --soft:#edf5ff; }
+      * { box-sizing:border-box; }
+      body { margin:0; min-height:100vh; display:grid; place-items:center; color:var(--ink); font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif; background:linear-gradient(135deg,#f7fbff 0%,var(--soft) 55%,#fff 100%); }
+      main { width:min(680px,calc(100% - 48px)); padding:52px 0; }
+      .brand { color:var(--blue); font-size:1.45rem; font-weight:850; letter-spacing:.08em; }
+      .status { display:inline-block; margin-top:42px; padding:7px 11px; border-radius:999px; background:#dcecff; color:#1452a5; font-size:.86rem; font-weight:700; }
+      h1 { margin:14px 0; font-size:clamp(2.5rem,7vw,4.7rem); line-height:1.02; letter-spacing:-.05em; }
+      p { max-width:560px; color:#42607d; font-size:1.12rem; }
+      footer { margin-top:54px; color:#58708a; font-size:.9rem; }
     </style>
   </head>
   <body>
-    <div class="hero">
-      <nav><div class="brand">AI1OK</div><div class="tag">Авторський Індивідуальний 1 Онлайн-Кабінет</div></nav>
-      <main>
-        <div class="eyebrow">Незалежна цифрова платформа</div>
-        <h1>Ваш власний онлайн-кабінет.</h1>
-        <p class="lead">AI1OK допомагає авторам, фахівцям і майстрам показати себе, а користувачам — безпечно знаходити потрібну людину та надсилати запит.</p>
-        <div class="actions"><a class="button primary" href="#roles">Обрати свою роль</a><a class="button" href="#principles">Як це працюватиме</a></div>
-      </main>
-    </div>
-    <section id="roles">
-      <h2>Хто ви в AI1OK?</h2>
-      <p class="role-intro">Оберіть один або кілька варіантів. Це не назавжди: у своєму кабінеті їх можна буде додати, змінити або вимкнути.</p>
-      <div class="roles" aria-label="Вибір ролі">
-        <label class="role"><input type="checkbox" name="role" value="Автор" /><h3>Автор</h3><p>Створюю, пишу, вигадую та показую роботи, ідеї або колекції.</p></label>
-        <label class="role"><input type="checkbox" name="role" value="Фахівець" /><h3>Фахівець</h3><p>Надаю професійні послуги або консультації.</p></label>
-        <label class="role"><input type="checkbox" name="role" value="Майстер своєї справи" /><h3>Майстер своєї справи</h3><p>Роблю практичну роботу: виробництво, ремонт, навчання, красу, техніку та інше.</p></label>
-        <label class="role"><input type="checkbox" name="role" value="Замовник або користувач" /><h3>Замовник / користувач</h3><p>Шукаю автора, фахівця чи майстра та хочу звернутися до нього.</p></label>
-        <label class="role"><input type="checkbox" name="role" value="Гість" /><h3>Гість</h3><p>Поки переглядаю відкриті кабінети та знайомлюся з платформою.</p></label>
-      </div>
-      <div class="role-choice"><button class="button primary" id="continue" type="button">Продовжити</button><span id="role-message" aria-live="polite"></span></div>
-      <p class="note">ШІ — за бажанням. Пізніше можна буде створити сторінку з допомогою власного ШІ або заповнити її самостійно. Публікується лише те, що ви самі підтвердите.</p>
-    </section>
-    <section id="next-step" hidden>
-      <div class="eyebrow">Наступний крок</div>
-      <h2>Що ви хочете зробити в AI1OK?</h2>
-      <p class="role-intro">Ваш вибір ролі збережемо лише після майбутньої реєстрації. Зараз оберіть напрямок.</p>
-      <div class="path-grid">
-        <button class="path" type="button" data-path="cabinet"><h3>Відкрити власний кабінет</h3><p>Створити свою публічну сторінку, показати роботи, послуги або майстерність. Контакти залишаються під вашим контролем.</p></button>
-        <button class="path" type="button" data-path="search"><h3>Знайти людину</h3><p>Шукати автора, фахівця чи майстра в майбутньому відкритому каталозі та надсилати запит після реєстрації.</p></button>
-      </div>
-      <div class="step-panel" id="cabinet-panel" hidden>
-        <h3>Як створимо ваш кабінет?</h3>
-        <div class="method-list"><div class="method"><strong>З допомогою ШІ</strong>AI1OK підготує промпт для вашого ChatGPT, Gemini або іншого інструмента. Ви самі затвердите текст.</div><div class="method"><strong>Самостійно</strong>Звичайна коротка форма: ім’я або назва, опис, напрям, роботи та правила звернення.</div></div>
-      </div>
-      <div class="step-panel" id="search-panel" hidden><h3>Каталог буде наступним модулем</h3><p>Спершу створюємо кабінети авторів і фахівців. Потім додамо безпечний пошук та запити на контакт.</p></div>
-    </section>
-    <section id="principles"><h2>Починаємо обережно</h2><div class="cards"><article class="card"><h3>Власний кабінет</h3><p>Публічний номер і сторінка — окремо від внутрішнього захищеного облікового запису.</p></article><article class="card"><h3>Контакт за згодою</h3><p>Для звернення користувач реєструється, а власник кабінету вирішує, чи приймати запит.</p></article><article class="card"><h3>Дані під контролем</h3><p>Мінімум інформації на старті. Телефон, оплата та інші приватні дані не відкриваються автоматично.</p></article></div></section>
-    <footer>© 2026 AI1OK. Перший публічний етап готується.</footer>
-    <script>
-      const roles = document.querySelectorAll('input[name="role"]');
-      const message = document.getElementById('role-message');
-      document.getElementById('continue').addEventListener('click', () => {
-        const selected = [...roles].filter((role) => role.checked).map((role) => role.value);
-        if (!selected.length) { message.textContent = 'Оберіть хоча б один варіант, щоб продовжити.'; return; }
-        message.textContent = `Обрано: ${selected.join(', ')}.`;
-        document.getElementById('next-step').hidden = false;
-        document.getElementById('next-step').scrollIntoView({ behavior: 'smooth' });
-      });
-      document.querySelectorAll('[data-path]').forEach((button) => button.addEventListener('click', () => {
-        const cabinet = button.dataset.path === 'cabinet';
-        document.getElementById('cabinet-panel').hidden = !cabinet;
-        document.getElementById('search-panel').hidden = cabinet;
-      }));
-    </script>
+    <main>
+      <div class="brand">AI1OK</div>
+      <div class="status">Закрите тестування</div>
+      <h1>Авторський Індивідуальний 1 Онлайн-Кабінет</h1>
+      <p>Платформа готується в закритому режимі. Доступ до майбутніх кабінетів надаватиметься лише після реєстрації та підтвердження.</p>
+      <footer>© 2026 AI1OK</footer>
+    </main>
   </body>
 </html>
