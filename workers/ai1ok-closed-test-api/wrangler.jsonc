@@ -1,1 +1,17 @@
-
+{
+  "$schema": "https://unpkg.com/wrangler/config-schema.json",
+  "name": "ai1ok-closed-test-api",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-31",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "ai1ok-closed-test",
+      "database_id": "d9df755e-8d77-44d4-9d49-b6523518d813"
+    }
+  ],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  }
+}
