@@ -174,6 +174,57 @@ async function assistantOverview(db, user) {
   return { generatedAt: now(), summary: { cabinets: cabinets.length, blocks: blocks.length, pendingCabinets, pendingBlocks, incomingRequests: incoming, activeThreads: threads.length }, tasks, limits: ['Помічник не публікує блоки, не надсилає повідомлення і не відкриває контактів без вашої дії.', 'Телефон та e-mail не входять до відповіді помічника і не показуються у вітрині.', 'Посилання на Google Meet додає лише учасник каналу після взаємної згоди.'] };
 }
 
+function assistantReplyText(result) {
+  if (typeof result === 'string') return result;
+  if (result && typeof result.response === 'string') return result.response;
+  return '';
+}
+
+async function assistantChat(db, user, body, env) {
+  const message = clean(body.message, 1200);
+  if (message.length < 3) return { error: 'Напишіть кілька слів: що саме ви хочете створити або знайти.' };
+  if (!env.AI || typeof env.AI.run !== 'function') return { error: 'Інтелектуальний модуль ще не підключено. Зверніться до адміністратора тесту.' };
+
+  const usageDay = now().slice(0, 10);
+  const currentUsage = await db.prepare('SELECT request_count FROM assistant_usage_daily WHERE owner_key = ? AND usage_day = ?').bind(user.ownerKey, usageDay).first();
+  if (Number(currentUsage?.request_count || 0) >= 15) return { error: 'На сьогодні вичерпано 15 відповідей помічника для одного учасника тесту. Спробуйте завтра.' };
+
+  const { results = [] } = await db.prepare(
+    'SELECT public_number, public_name, cabinet_type, directions, about FROM cabinets WHERE owner_key = ? ORDER BY updated_at DESC LIMIT 5',
+  ).bind(user.ownerKey).all();
+  const safeCabinets = results.map((cabinet) => ({
+    number: cabinet.public_number,
+    name: cabinet.public_name,
+    type: cabinet.cabinet_type,
+    directions: cabinet.directions,
+    about: cabinet.about,
+  }));
+  const prompt = [
+    'Ти — помічник закритого тесту порталу АІ 1 ОК. Відповідай лише українською, просто і доброзичливо.',
+    'Твоя задача — допомогти людині заповнити анкету або робочий блок кабінету. Дай коротку чернетку, яку користувач зможе сам перевірити й перенести у форму.',
+    'Не вигадуй факти, контакти, освіту, документи або ціни. Не проси пароль, код із e-mail, адресу проживання, дату народження, телефон чи приватний e-mail.',
+    'Не стверджуй, що щось збережено, опубліковано, надіслано або погоджено. Не радь обходити перевірку адміністратора.',
+    'Якщо запит стосується медицини, психології, права або фінансів, нагадай: публікація можлива лише після перевірки документів та договору.',
+    'Формат відповіді: 1) коротка порада; 2) Чернетка для анкети або блоку; 3) одне уточнювальне питання.',
+    `Вже створені публічні дані кабінетів користувача: ${JSON.stringify(safeCabinets)}`,
+    `Запит користувача: ${message}`,
+  ].join('\n');
+  try {
+    const result = await env.AI.run('@cf/meta/llama-3.1-8b-instruct-fast', { prompt, max_tokens: 650 });
+    const answer = clean(assistantReplyText(result), 5000);
+    if (!answer) return { error: 'Модель не повернула відповідь. Спробуйте сформулювати запит коротше.' };
+    await db.prepare(`
+      INSERT INTO assistant_usage_daily (owner_key, usage_day, request_count, updated_at)
+      VALUES (?, ?, 1, ?)
+      ON CONFLICT(owner_key, usage_day) DO UPDATE SET request_count = request_count + 1, updated_at = excluded.updated_at
+    `).bind(user.ownerKey, usageDay, now()).run();
+    return { answer, notice: 'Це чернетка. Перевірте її перед перенесенням у форму: помічник нічого не зберіг і не опублікував.' };
+  } catch (error) {
+    console.log(JSON.stringify({ event: 'assistant_ai_error', error: error instanceof Error ? error.message : 'unknown' }));
+    return { error: 'Не вдалося отримати відповідь моделі. Спробуйте пізніше.' };
+  }
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === 'OPTIONS') return new Response(null, { status: 204 });
@@ -206,6 +257,11 @@ export default {
 
       if (request.method === 'GET' && path === '/api/assistant/overview') {
         return json(await assistantOverview(env.DB, user));
+      }
+
+      if (request.method === 'POST' && path === '/api/assistant/chat') {
+        const result = await assistantChat(env.DB, user, await readBody(request), env);
+        return result.error ? json(result, 400) : json(result);
       }
 
       if (request.method === 'POST' && path === '/api/cabinets') {
